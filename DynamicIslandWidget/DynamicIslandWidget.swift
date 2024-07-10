@@ -7,6 +7,9 @@
 
 import WidgetKit
 import SwiftUI
+import SwiftData
+
+@Query var remain:[RemainTime]
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -42,11 +45,48 @@ struct DynamicIslandWidgetEntryView : View {
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+            if let left = remain.first?.leftMin{
+                let hour = left/60
+                let min = left%60
+                Text("수면가능 시간").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/.bold()).foregroundColor(.white)
+                Spacer().frame(height: 10)
+                Text("\(hour)시간 \(min)분").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.white)
+                Spacer().frame(height: 30)
+                if(left>480){
+                    Image(systemName: "battery.100percent").resizable()
+                        .foregroundColor(.white)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 200, height: 100)
+                    Spacer().frame(height: 10)
+                    Text("꿀잠 가능!!!").font(.title).foregroundColor(.white)
+                    
+                }
+                else if(left>360){
+                    Image(systemName: "battery.50percent").resizable()
+                        .foregroundColor(.white)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 200, height: 100)
+                    Text("피곤하다 자자~").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.yellow)
+                }
+                else if(left>240){
+                    Image(systemName: "battery.25percent").resizable()
+                        .foregroundColor(.white)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 200, height: 100)
+                    Spacer().frame(height: 20)
+                    Text("내일아침 감당 가능..?").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.red)
+                }
+                else {
+                    Image(systemName: "battery.0percent").resizable()
+                        .foregroundColor(.white)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 200, height: 100)
+                    Text("ㅈ됐다 밤새자 ㅎㅎ").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.white)
+                }
+                
+                
+                //            Spacer().frame(height: 140)
+            }
         }
     }
 }

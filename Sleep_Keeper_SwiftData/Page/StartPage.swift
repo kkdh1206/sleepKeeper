@@ -7,9 +7,9 @@
 
 import SwiftUI
 import SwiftData
+import ActivityKit
 
-
-struct ContentView: View {
+struct StartPage: View {
     @Query var item:[WakeUpTime]
     @Query var sleepStartTime:[SleepStartTime]
     @Query var remain:[RemainTime]
@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var showTimePicker = false
     @State private var selectedTime = Date()
     @State private var pressed = false
+    
     var body: some View {
         if(!pressed){
             NavigationView{
@@ -26,6 +27,7 @@ struct ContentView: View {
                         Text("기상시간: \(formattedTime(currentItem.timestamp))")
                             .font(.largeTitle)
                             .padding()
+                        
                     } else {
                         Text("선택된 시간이 없습니다")
                             .font(.largeTitle)
@@ -33,6 +35,9 @@ struct ContentView: View {
                     }
                     
                     Button(action: {
+                        if let old = item.first{
+                            selectedTime = old.timestamp
+                        }
                         showTimePicker.toggle()
                     }) {
                         Label("시간변경", systemImage: "clock")
@@ -42,6 +47,7 @@ struct ContentView: View {
                     .sheet(isPresented: $showTimePicker) { // sheet형식으로 팝업창 띄움
                         TimePickerView(selectedTime: $selectedTime)
                     }
+                    Spacer().frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                     if(!pressed){
                         CircleButton(buttonText: "수면시작!"){
                             // 여기다가 누르면 시간 흘러가게 구현하면 될듯
@@ -119,6 +125,6 @@ struct CircleButton: View {
 }
 
 #Preview {
-    ContentView()
+    StartPage()
         .modelContainer(for: WakeUpTime.self, inMemory: true)
 }

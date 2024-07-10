@@ -8,7 +8,7 @@
 import WidgetKit
 import SwiftUI
 
-@main
+//@main
 struct DynamicIslandWidgetBundle: WidgetBundle {
     var body: some Widget {
         DynamicIslandWidget()
