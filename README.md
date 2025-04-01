@@ -11,17 +11,8 @@ This uses the Live activites to stack on your screen.
 
 ## 🛠️ Tech Stack
 - **Frontend**: Swift
-
 ---
 
-## ✨ Features
-- User sign up / login
-- Product listing & image upload
-- Chat-based messaging between users
-- Product search & filtering
-- Admin report system (if any)
-
----
 
 ## 📸 Screenshots  
 - **Main page**
@@ -30,4 +21,4 @@ This uses the Live activites to stack on your screen.
 
 - **Live Activites**
 - 
-  <img src="screenshots/live_activities.jpg" width="300"/>
+  <img src="screenshots/Live_activities.jpg" width="300"/>
