@@ -25,7 +25,9 @@ This uses the Live activites to stack on your screen.
 
 ## 📸 Screenshots  
 - **Main page**
+- 
   <img src="screenshots/main.png" width="300"/>
 
 - **Live Activites**
-  <img src="screenshots/live_activities.png" width="300"/>
+- 
+  <img src="screenshots/live_activities.jpg" width="300"/>
